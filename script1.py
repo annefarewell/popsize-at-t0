@@ -49,11 +49,22 @@ popt0 = 10 ** log10n1
 gdata.insert(col, "popt0", popt0)
 print gdata
 
+gdata.plot.line("GT", "popt0")
+
 #create new file with metadata and pop size at t=0, (statistics later)
 
 
 
 #graph of calculated growth curve with raw data
+#t= time on x-axis
+#N= number of cells at t (y-axis) (kt2/2.303)+log10N1
 
+t= 1
+log10N=((gdata["k"]*t)/2.303)+gdata["log10n1"]
+N=10** log10N
+print N
+
+#Need for loop for different values of t and create new data set (or some trick?)
+#can I plot this together with raw data?
 
 #if time, quality assurance, check that time at GT is 'reasonable' :is greater than/less than a user defined value
