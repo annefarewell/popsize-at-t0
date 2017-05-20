@@ -57,9 +57,20 @@ gdata.plot.line("GT", "popt0")
 
 #graph of calculated growth curve with raw data
 #t= time on x-axis
-#N= number of cells at t (y-axis) (kt2/2.303)+log10N1
+#N= number of cells at t: (kt/2.303)+log10N1
+#could be done instead with a function y= 
 
-t= 1
+def CellN(t,str_k,str_log10n1):
+    str_log10N=(str_k*t/2.303)+str_log10n1
+    str_N=10**str_log10N
+    print str_N
+    
+for t in range(1,24):
+    CellN(t,gdata.iloc[2:3,4:5], gdata.iloc[2:3, 8:9])
+    print CellN
+
+
+t=1
 log10N=((gdata["k"]*t)/2.303)+gdata["log10n1"]
 N=10** log10N
 print N
@@ -69,6 +80,16 @@ print N
 print gdata.iloc[2,2]
 print gdata.iloc[2:3, :]
 print gdata.iloc[2,0]
+print gdata.iloc[ 0:1, 0:1]
+
+for index, row in gdata.iterrows():
+    print row["k"]
+    
+    
+    
+#for each strain, for t=1 to 24 (each hour), calculate N and create a new array labeled with row lab, t and N in columns  
+
+
 #can I plot this together with raw data?
 
 #if time, quality assurance, check that time at GT is 'reasonable' :is greater than/less than a user defined value
