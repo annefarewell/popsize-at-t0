@@ -65,6 +65,10 @@ N=10** log10N
 print N
 
 #Need for loop for different values of t and create new data set (or some trick?)
+#Or maybe call one strain's data at a time?
+print gdata.iloc[2,2]
+print gdata.iloc[2:3, :]
+print gdata.iloc[2,0]
 #can I plot this together with raw data?
 
 #if time, quality assurance, check that time at GT is 'reasonable' :is greater than/less than a user defined value
