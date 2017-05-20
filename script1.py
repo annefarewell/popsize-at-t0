@@ -44,7 +44,10 @@ popt0 = 10 ** log10n1
 gdata.insert(9, "popt0", popt0)
 print gdata
 
-#create new file with metadata and pop size at t=0, statistics?
+#create new file with metadata and pop size at t=0, (statistics later)
+
+initial_pop = gdata['popt0']
+print initial_pop
 
 #graph of calculated growth curve with raw data
 

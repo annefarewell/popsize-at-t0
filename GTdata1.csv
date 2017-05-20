@@ -1,5 +1,5 @@
-﻿,GT,Pop_GT,Time_GT
-strain 1,0.5,80000,180
+﻿Strain,GT,Pop_GT,Time_GT
+strain1,0.5,80000,180
 strain 2,0.5,40000,180
 strain 3,0.5,40000,210
 strain 4,0.5,40000,150
