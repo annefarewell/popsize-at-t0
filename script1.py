@@ -13,41 +13,45 @@ gdata = pd.read_csv('c:/python/popsize-at-t0/GTdata1.csv')
 
 k = 0.693 / gdata["GT"]
 
-#insert k into gdata array postion 4
-
-gdata.insert(4, 'k', k)
+#insert k into gdata array postion 'col'
+col=4
+gdata.insert(col, 'k', k)
+col = col + 1
 
 #calculate kt2 (k * Time_GT) (time in hours) and append to array
 
 kt2 = gdata["k"] * (gdata ["Time_GT"]/60)
-gdata.insert(5,'kt2',kt2)
+gdata.insert(col,'kt2',kt2)
+col = col + 1
 
 #calculate log10n2 (log10(PopGT)) and append to array
 
 log10n2 = np.log10(gdata["Pop_GT"])
-gdata.insert(6, 'log10n2', log10n2)
+gdata.insert(col, 'log10n2', log10n2)
+col = col + 1
 
 #calculate kt2b (kt2/2.303) and append to array
 
 kt2b = gdata["kt2"] / 2.303
-gdata.insert(7, "kt2b", kt2b)
+gdata.insert(col, "kt2b", kt2b)
+col = col + 1
 
 #calculate log10N1 (-kt2b-log10n2) and append to array
 
 log10n1neg = gdata["kt2b"]-gdata["log10n2"]
 log10n1 = log10n1neg * -1
-gdata.insert(8, "log10n1", log10n1)
+gdata.insert(col, "log10n1", log10n1)
+col = col + 1
 
 #calculate pop size at t=0 (popt0=10^log10n1)
 
 popt0 = 10 ** log10n1
-gdata.insert(9, "popt0", popt0)
+gdata.insert(col, "popt0", popt0)
 print gdata
 
 #create new file with metadata and pop size at t=0, (statistics later)
 
-initial_pop = gdata['popt0']
-print initial_pop
+
 
 #graph of calculated growth curve with raw data
 
