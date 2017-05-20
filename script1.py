@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 
 #import data file including gen time, time at GT and pop size at GT
 
-gdata = pd.read_csv('c:/python/popsize-at-t0/GTdata1.csv')
+gdata = pd.read_csv('c:/python/popsize-at-t0/GTdata1.csv',index_col=0)
 
 #calculate k = 0.693/GT 
 
 k = 0.693 / gdata["GT"]
 
 #insert k into gdata array postion 'col'
-col=4
+col=3
 gdata.insert(col, 'k', k)
 col = col + 1
 
@@ -63,12 +63,14 @@ gdata.plot.line("GT", "popt0")
 def CellN(t,str_k,str_log10n1):
     str_log10N=(str_k*t/2.303)+str_log10n1
     str_N=10**str_log10N
-    print str_N
+    return str_N
     
 for t in range(1,24):
     CellN(t,gdata.iloc[2:3,4:5], gdata.iloc[2:3, 8:9])
     print CellN
-
+    
+#function doesn't work on iloc slices-not treated as numbers???
+#NOTE! iloc numbers are incorrect because I made col 0 an index
 
 t=1
 log10N=((gdata["k"]*t)/2.303)+gdata["log10n1"]
