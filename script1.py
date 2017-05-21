@@ -63,29 +63,20 @@ gdata.plot.line("GT", "popt0")
 def CellN(t,str_k,str_log10n1):
     str_log10N=(str_k*t/2.303)+str_log10n1
     str_N=10**str_log10N
-    return str_N
-    
-for t in range(1,24):
-    CellN(t,gdata.iloc[2:3,4:5], gdata.iloc[2:3, 8:9])
-    print CellN
-    
-#function doesn't work on iloc slices-not treated as numbers???
-#NOTE! iloc numbers are incorrect because I made col 0 an index
+    print str_N
 
-t=1
-log10N=((gdata["k"]*t)/2.303)+gdata["log10n1"]
-N=10** log10N
-print N
+for t in range(1,24):
+    CellN(t,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
+    
+    
+
+
 
 #Need for loop for different values of t and create new data set (or some trick?)
 #Or maybe call one strain's data at a time?
-print gdata.iloc[2,2]
-print gdata.iloc[2:3, :]
-print gdata.iloc[2,0]
-print gdata.iloc[ 0:1, 0:1]
 
-for index, row in gdata.iterrows():
-    print row["k"]
+#for index, row in gdata.iterrows():
+   # print row["k"]
     
     
     
