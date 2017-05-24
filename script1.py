@@ -53,7 +53,7 @@ print gdata
 
 #create new file with metadata and pop size at t=0, (statistics later)
 
-
+#calculate a theoretical growth curve and plot along with raw data
 
 
 def CellN(t,str_k,str_log10n1):
@@ -67,26 +67,41 @@ for t in range(1,24):
     
    
 
-def graph(x_range):
-    x=np.array(x_range)
-    y=CellN(x,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
-    plt.plot(x,y)
-    plt.show()    
+#def graph(x_range):
+    #x=np.array(x_range)
+    #y=CellN(x,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
+    #plt.plot(x,y)
+        
 
-graph (range(1,25))
+#graph (range(1,25))
 
-s1data = pd.read_csv('c:/python/popsize-at-t0/strain1data.csv')
-x2=s1data["time"]
-y2=s1data["cellN"]
-plt.scatter(x2,y2)
-plt.show()
+#add raw data to graph
+
+#s1data = pd.read_csv('c:/python/popsize-at-t0/strain1data.csv')
+#x2=s1data["time"]
+#y2=s1data["cellN"]
+#plt.scatter(x2,y2)
+#plt.show()
+#plt.savefig("strain1.png")
 
 
 #Need for loop for different values of t and create new data set (or some trick?)
+
+def graph():
+    for index,row in (gdata.iterrows()):
+        x = np.array(range(1,25))
+        y = CellN(x,row["k" ],row["log10n1" ])
+        plt.plot(x,y)
+        print x, y
+        plt.show()
+    
+graph()
+
+    
 #Or maybe call one strain's data at a time?
 
 #for index, row in gdata.iterrows():
-   # print row["k"]
+  # print row["k"]
     
     
     
