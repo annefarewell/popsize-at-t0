@@ -49,44 +49,37 @@ popt0 = 10 ** log10n1
 gdata.insert(col, "popt0", popt0)
 print gdata
 
-#gdata.plot.line("GT", "popt0") #should I use plt.plot command?
-#plt.show()
+
 
 #create new file with metadata and pop size at t=0, (statistics later)
 
 
 
-#graph of calculated growth curve with raw data
-#t= time on x-axis
-#N= number of cells at t: (kt/2.303)+log10N1
-#could be done instead with a function y= 
-
-#curve =pd.DataFrame()
-#curve.append(range(1,24))
-
 
 def CellN(t,str_k,str_log10n1):
     str_log10N=(str_k*t/2.303)+str_log10n1
     str_N=10**str_log10N
-    print str_N
-    #curve.append(str_N)
-    #curve.plot()
-    #plt.show()
-    
+    return str_N
+       
 
 for t in range(1,24):
     CellN(t,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
     
    
 
-#def graph(x_range):
-#    x=np.array(x_range)
-#    y=CellN(x,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
-#    plt.plot(x,y)
-#    plt.show()    
+def graph(x_range):
+    x=np.array(x_range)
+    y=CellN(x,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
+    plt.plot(x,y)
+    plt.show()    
 
-#graph (range(1,24))
+graph (range(1,25))
 
+s1data = pd.read_csv('c:/python/popsize-at-t0/strain1data.csv')
+x2=s1data["time"]
+y2=s1data["cellN"]
+plt.scatter(x2,y2)
+plt.show()
 
 
 #Need for loop for different values of t and create new data set (or some trick?)
