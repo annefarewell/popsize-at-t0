@@ -91,8 +91,15 @@ def graph():
     for index,row in (gdata.iterrows()):
         x = np.array(range(1,25))
         y = CellN(x,row["k" ],row["log10n1" ])
+        sdata = pd.read_csv('c:/python/popsize-at-t0/straindata.csv')
+        x2=sdata["time"]
+        y2=sdata[index]
         plt.figure(index)
+        plt.scatter(x2,y2)
         plt.plot(x,y)
+        #plt.ax.set_yscale('log')
+        print x2
+        plt.show()
         plt.savefig(index+'.png')        
     
 graph()
