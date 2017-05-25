@@ -91,9 +91,9 @@ def graph():
     for index,row in (gdata.iterrows()):
         x = np.array(range(1,25))
         y = CellN(x,row["k" ],row["log10n1" ])
+        plt.figure(index)
         plt.plot(x,y)
-        print x, y
-        plt.show()
+        plt.savefig(index+'.png')        
     
 graph()
 
