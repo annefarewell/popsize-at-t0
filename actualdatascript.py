@@ -7,26 +7,26 @@ import matplotlib.pyplot as plt
 
 #import data file including gen time, time at GT and pop size at GT
 
-gdata = pd.read_csv('c:/python/popsize-at-t0/GTdata1.csv',index_col=0)
+gdata = pd.read_csv('c:/python/popsize-at-t0/phenotypes.Absolute.plate_2.csv',index_col=3)
 
 #calculate k = 0.693/GT 
 
-k = 0.693 / gdata["GT"]
+k = 0.693 / gdata["Phenotypes.GenerationTime"]
 
 #insert k into gdata array postion 'col'
-col=3
+col=41
 gdata.insert(col, 'k', k)
 col = col + 1
 
 #calculate kt2 (k * Time_GT) (time in hours) and append to array
 
-kt2 = gdata["k"] * (gdata ["Time_GT"]/60)
+kt2 = gdata["k"] * (gdata ["Phenotypes.GenerationTimeWhen"])
 gdata.insert(col,'kt2',kt2)
 col = col + 1
 
 #calculate log10n2 (log10(PopGT)) and append to array
 
-log10n2 = np.log10(gdata["Pop_GT"])
+log10n2 = np.log10(gdata["Phenotypes.GenerationTimePopulationSize"])
 gdata.insert(col, 'log10n2', log10n2)
 col = col + 1
 
@@ -50,11 +50,12 @@ gdata.insert(col, "popt0", popt0)
 print gdata
 
 
+#create new file with metadata and pop size at t=0?, (statistics later)
 
-#create new file with metadata and pop size at t=0, (statistics later)
+np.savetxt("c:/python/popsize-at-t0/test1.csv", gdata)
 
 #calculate a theoretical growth curve and plot along with raw data
-
+'''
 
 def CellN(t,str_k,str_log10n1):
     str_log10N=(str_k*t/2.303)+str_log10n1
@@ -65,25 +66,6 @@ def CellN(t,str_k,str_log10n1):
 for t in range(1,24):
     CellN(t,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
     
-   
-
-#def graph(x_range):
-    #x=np.array(x_range)
-    #y=CellN(x,gdata.loc['strain1',["k" ]] [0], gdata.loc['strain1',["log10n1" ]] [0])
-    #plt.plot(x,y)
-        
-
-#graph (range(1,25))
-
-#add raw data to graph
-
-#s1data = pd.read_csv('c:/python/popsize-at-t0/strain1data.csv')
-#x2=s1data["time"]
-#y2=s1data["cellN"]
-#plt.scatter(x2,y2)
-#plt.show()
-#plt.savefig("strain1.png")
-
 
 #Need for loop for different values of t and create new data set (or some trick?)
 
@@ -98,21 +80,12 @@ def graph():
         plt.scatter(x2,y2)
         plt.plot(x,y)
         plt.yscale('log')
-        plt.savefig(index+'.png')        
+        plt.savefig('c:/python/Graphs'+index+'.png')        
     
 graph()
-
-    
-#Or maybe call one strain's data at a time?
-
-#for index, row in gdata.iterrows():
-  # print row["k"]
     
     
     
-#for each strain, for t=1 to 24 (each hour), calculate N and create a new array labeled with row lab, t and N in columns  
-
-
-#can I plot this together with raw data?
 
 #if time, quality assurance, check that time at GT is 'reasonable' :is greater than/less than a user defined value
+'''
