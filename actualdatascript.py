@@ -7,26 +7,30 @@ import matplotlib.pyplot as plt
 
 #import data file including gen time, time at GT and pop size at GT
 
-gdata = pd.read_csv('./popsize-at-t0/phenotypes.Absolute.plate_2.csv',index_col=3)
+#EDIT the file name and path
+phenotypes_absolute_plate='./popsize-at-t0/phenotypes.Absolute.plate_1' 
+
+gdata = pd.read_csv(phenotypes_absolute_plate+'.csv',index_col=3)
 
 #calculate k = 0.693/GT 
 
-k = 0.693 / gdata["Phenotypes.GenerationTime"]
+pd.to_numeric(gdata["Phenotypes.GenerationTime"],errors='coerce')
+k = 0.693 / pd.to_numeric(gdata["Phenotypes.GenerationTime"],errors='coerce')
 
 #insert k into gdata array postion 'col'
-col=41
+col=len(gdata.columns)
 gdata.insert(col, 'k', k)
 col = col + 1
 
 #calculate kt2 (k * Time_GT) (time in hours) and append to array
 
-kt2 = gdata["k"] * (gdata ["Phenotypes.GenerationTimeWhen"])
+kt2 = gdata["k"] * (pd.to_numeric(gdata ["Phenotypes.GenerationTimeWhen"],errors='coerce'))
 gdata.insert(col,'kt2',kt2)
 col = col + 1
 
 #calculate log10n2 (log10(PopGT)) and append to array
 
-log10n2 = np.log10(gdata["Phenotypes.GenerationTimePopulationSize"])
+log10n2 = np.log10(pd.to_numeric(gdata["Phenotypes.GenerationTimePopulationSize"],errors='coerce'))
 gdata.insert(col, 'log10n2', log10n2)
 col = col + 1
 
@@ -50,9 +54,9 @@ gdata.insert(col, "popt0", popt0)
 print gdata
 
 
-#create new file with metadata and pop size at t=0?, (statistics later)
+#create new file with metadata and pop size at t=0
 
-gdata.to_csv("./popsize-at-t0/test1.csv")
+gdata.to_csv(phenotypes_absolute_plate+'t0.csv')
 
 #eliminate data with gt_when < 3 (for example)
 #box and whiskers plt of grouped data
