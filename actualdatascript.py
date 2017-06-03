@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 #import data file including gen time, time at GT and pop size at GT
 
-gdata = pd.read_csv('c:/python/popsize-at-t0/phenotypes.Absolute.plate_2.csv',index_col=3)
+gdata = pd.read_csv('./popsize-at-t0/phenotypes.Absolute.plate_2.csv',index_col=3)
 
 #calculate k = 0.693/GT 
 
@@ -52,7 +52,12 @@ print gdata
 
 #create new file with metadata and pop size at t=0?, (statistics later)
 
-np.savetxt("c:/python/popsize-at-t0/test1.csv", gdata)
+gdata.to_csv("./popsize-at-t0/test1.csv")
+
+#eliminate data with gt_when < 3 (for example)
+#box and whiskers plt of grouped data
+
+
 
 #calculate a theoretical growth curve and plot along with raw data
 '''
